@@ -7,6 +7,7 @@ export const Pokemon = () => {
   const [pokemon, setPokemon] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [search, setSearch] = useState("");
 
   const fetchPokemon = async () => {
     try {
@@ -38,6 +39,10 @@ export const Pokemon = () => {
     })();
   }, []);
 
+  const searchData = pokemon.filter((curPokemon) =>
+    curPokemon.name.toLowerCase().includes(search.toLowerCase()),
+  );
+
   if (loading) {
     return (
       <div>
@@ -60,9 +65,17 @@ export const Pokemon = () => {
         <header>
           <h1>Lets Catch pokemon</h1>
         </header>
+        <div className="pokemon-search">
+          <input
+            type="text"
+            placeholder="Search Pokemon"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
         <div>
           <ul className="cards">
-            {pokemon.map((curPokemon) => (
+            {searchData.map((curPokemon) => (
               <PokemonCards key={curPokemon.id} pokemonData={curPokemon} />
             ))}
           </ul>

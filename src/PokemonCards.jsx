@@ -1,4 +1,4 @@
-export const PokemonCards = ([pokemonData]) => {
+export const PokemonCards = ({ pokemonData }) => {
   return (
     <li className="pokemon-card">
       <figure>
